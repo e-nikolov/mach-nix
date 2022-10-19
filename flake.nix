@@ -21,7 +21,7 @@
           false;
       usageGen = "usage: nix (build|shell) mach-nix#gen.(python|docker).package1.package2...";
     in
-      (flake-utils.lib.eachDefaultSystem (system:
+      (flake-utils.lib.eachSystem (flake-utils.lib.defaultSystems ++ [ flake-utils.lib.system.armv7l-linux ]) (system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
           mach-nix-default = import ./default.nix {
